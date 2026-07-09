@@ -1,0 +1,44 @@
+<mat-card appearance="outlined" class="book-card">
+  <mat-card-header>
+    <mat-card-title>{{ book().title }}</mat-card-title>
+    <mat-card-subtitle>{{ book().author }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="chips">
+      @if (book().genre) {
+        <mat-chip-set>
+          <mat-chip>{{ book().genre }}</mat-chip>
+        </mat-chip-set>
+      }
+      @if (readingStatusLabel()) {
+        <mat-chip-set>
+          <mat-chip>{{ readingStatusLabel() }}</mat-chip>
+        </mat-chip-set>
+      }
+    </div>
+
+    @if (book().publicationYear) {
+      <p class="meta">Published: {{ book().publicationYear }}</p>
+    }
+
+    @if (ratingStars()) {
+      <p class="rating" aria-hidden="true">{{ ratingStars() }}</p>
+    }
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button (click)="view.emit()">
+      <mat-icon>visibility</mat-icon>
+      View
+    </button>
+    <button mat-button (click)="edit.emit()">
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+    <button mat-button color="warn" (click)="delete.emit()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

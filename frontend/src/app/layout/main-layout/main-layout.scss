@@ -1,0 +1,22 @@
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-name {
+  margin-right: 8px;
+}
+
+.content {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}

@@ -1,0 +1,55 @@
+.back-button {
+  margin-bottom: 16px;
+}
+
+.detail-card {
+  max-width: 600px;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.details-list {
+  margin: 0;
+}
+
+.detail-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.detail-row dt {
+  font-weight: 500;
+  min-width: 140px;
+}
+
+.detail-row dd {
+  margin: 0;
+}
+
+.detail-row.notes {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 16px;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.state-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}

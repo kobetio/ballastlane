@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Book' : 'Add Book' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" maxlength="150" />
+      @if (titleControl.hasError('server')) {
+        <mat-error>{{ titleControl.getError('server') }}</mat-error>
+      } @else if (titleControl.hasError('required')) {
+        <mat-error>Title is required.</mat-error>
+      } @else if (titleControl.hasError('maxlength')) {
+        <mat-error>Title must not exceed 150 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Author</mat-label>
+      <input matInput formControlName="author" maxlength="100" />
+      @if (authorControl.hasError('server')) {
+        <mat-error>{{ authorControl.getError('server') }}</mat-error>
+      } @else if (authorControl.hasError('required')) {
+        <mat-error>Author is required.</mat-error>
+      } @else if (authorControl.hasError('maxlength')) {
+        <mat-error>Author must not exceed 100 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Genre</mat-label>
+        <input matInput formControlName="genre" maxlength="50" />
+        @if (genreControl.hasError('server')) {
+          <mat-error>{{ genreControl.getError('server') }}</mat-error>
+        } @else if (genreControl.hasError('maxlength')) {
+          <mat-error>Genre must not exceed 50 characters.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Publication Year</mat-label>
+        <input matInput type="number" formControlName="publicationYear" [max]="currentYear" min="1450" />
+        @if (publicationYearControl.hasError('server')) {
+          <mat-error>{{ publicationYearControl.getError('server') }}</mat-error>
+        } @else if (publicationYearControl.hasError('min') || publicationYearControl.hasError('max')) {
+          <mat-error>Publication year must be between 1450 and {{ currentYear }}.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Reading Status</mat-label>
+        <mat-select formControlName="readingStatus">
+          <mat-option [value]="null">Not set</mat-option>
+          @for (option of readingStatusOptions; track option.value) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Rating (1-5)</mat-label>
+        <input matInput type="number" formControlName="rating" min="1" max="5" />
+        @if (ratingControl.hasError('server')) {
+          <mat-error>{{ ratingControl.getError('server') }}</mat-error>
+        } @else if (ratingControl.hasError('min') || ratingControl.hasError('max')) {
+          <mat-error>Rating must be between 1 and 5.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Notes</mat-label>
+      <textarea matInput formControlName="notes" rows="3" maxlength="1000"></textarea>
+      @if (notesControl.hasError('server')) {
+        <mat-error>{{ notesControl.getError('server') }}</mat-error>
+      } @else if (notesControl.hasError('maxlength')) {
+        <mat-error>Notes must not exceed 1000 characters.</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="isSubmitting()">
+      @if (isSubmitting()) {
+        <mat-spinner diameter="20" />
+      } @else {
+        <span>{{ isEditMode ? 'Save Changes' : 'Add Book' }}</span>
+      }
+    </button>
+  </mat-dialog-actions>
+</form>

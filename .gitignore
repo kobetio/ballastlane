@@ -1,0 +1,26 @@
+# This file only covers things that apply repo-wide (OS/editor noise and
+# top-level secrets). Project-specific ignores live in:
+#   - backend/.gitignore   (.NET build output, test results, NuGet, etc.)
+#   - frontend/.gitignore  (node_modules, Angular build output, etc.)
+
+## =========================
+## Environment / Secrets
+## =========================
+.env
+.env.*
+*.pfx
+*.pem
+*.key
+
+## =========================
+## OS / Editor
+## =========================
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo

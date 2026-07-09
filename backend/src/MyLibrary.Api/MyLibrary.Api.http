@@ -1,0 +1,67 @@
+@MyLibrary.Api_HostAddress = http://localhost:5073
+@token = {{login.response.body.token}}
+
+### Register a new user
+# @name register
+POST {{MyLibrary.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ada Lovelace",
+  "email": "ada@example.com",
+  "password": "P@ssw0rd123"
+}
+
+### Log in (also returns a JWT; reuse this if the user already exists)
+# @name login
+POST {{MyLibrary.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ada@example.com",
+  "password": "P@ssw0rd123"
+}
+
+### List my books
+GET {{MyLibrary.Api_HostAddress}}/api/books
+Authorization: Bearer {{token}}
+
+### Create a book
+# @name createBook
+POST {{MyLibrary.Api_HostAddress}}/api/books
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Structure and Interpretation of Computer Programs",
+  "author": "Harold Abelson",
+  "genre": "Computer Science",
+  "publicationYear": 1985,
+  "readingStatus": "Reading",
+  "rating": 5,
+  "notes": "Classic."
+}
+
+### Get a book by id
+@bookId = {{createBook.response.body.id}}
+GET {{MyLibrary.Api_HostAddress}}/api/books/{{bookId}}
+Authorization: Bearer {{token}}
+
+### Update a book
+PUT {{MyLibrary.Api_HostAddress}}/api/books/{{bookId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Structure and Interpretation of Computer Programs",
+  "author": "Harold Abelson",
+  "genre": "Computer Science",
+  "publicationYear": 1985,
+  "readingStatus": "Read",
+  "rating": 5,
+  "notes": "Finished it!"
+}
+
+### Delete a book
+DELETE {{MyLibrary.Api_HostAddress}}/api/books/{{bookId}}
+Authorization: Bearer {{token}}

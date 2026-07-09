@@ -1,0 +1,69 @@
+<button mat-button (click)="goBack()" class="back-button">
+  <mat-icon>arrow_back</mat-icon>
+  Back to My Books
+</button>
+
+@if (isLoading()) {
+  <div class="state-container">
+    <mat-spinner diameter="48" />
+  </div>
+} @else if (loadError()) {
+  <div class="state-container">
+    <mat-icon class="state-icon">error_outline</mat-icon>
+    <p>{{ loadError() }}</p>
+  </div>
+} @else if (book()) {
+  <mat-card appearance="outlined" class="detail-card">
+    <mat-card-header>
+      <mat-card-title>{{ book()!.title }}</mat-card-title>
+      <mat-card-subtitle>{{ book()!.author }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="chips">
+        @if (book()!.genre) {
+          <mat-chip-set>
+            <mat-chip>{{ book()!.genre }}</mat-chip>
+          </mat-chip-set>
+        }
+        @if (readingStatusLabel()) {
+          <mat-chip-set>
+            <mat-chip>{{ readingStatusLabel() }}</mat-chip>
+          </mat-chip-set>
+        }
+      </div>
+
+      <dl class="details-list">
+        @if (book()!.publicationYear) {
+          <div class="detail-row">
+            <dt>Publication Year</dt>
+            <dd>{{ book()!.publicationYear }}</dd>
+          </div>
+        }
+        @if (ratingStars()) {
+          <div class="detail-row">
+            <dt>Rating</dt>
+            <dd aria-hidden="true">{{ ratingStars() }}</dd>
+          </div>
+        }
+        @if (book()!.notes) {
+          <div class="detail-row notes">
+            <dt>Notes</dt>
+            <dd>{{ book()!.notes }}</dd>
+          </div>
+        }
+      </dl>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button (click)="edit()">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+}

@@ -1,0 +1,40 @@
+<div class="header">
+  <h1>My Books</h1>
+  <button mat-flat-button color="primary" (click)="openCreateDialog()">
+    <mat-icon>add</mat-icon>
+    Add Book
+  </button>
+</div>
+
+@if (isLoading()) {
+  <div class="state-container">
+    <mat-spinner diameter="48" />
+    <p>Loading your books...</p>
+  </div>
+} @else if (loadError()) {
+  <div class="state-container">
+    <mat-icon class="state-icon">error_outline</mat-icon>
+    <p>{{ loadError() }}</p>
+    <button mat-stroked-button (click)="loadBooks()">Retry</button>
+  </div>
+} @else if (isEmpty()) {
+  <div class="state-container">
+    <mat-icon class="state-icon">menu_book</mat-icon>
+    <p>Your library is empty. Add your first book to get started!</p>
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      Add Book
+    </button>
+  </div>
+} @else {
+  <div class="book-grid">
+    @for (book of sortedBooks(); track book.id) {
+      <app-book-item
+        [book]="book"
+        (view)="viewDetails(book)"
+        (edit)="openEditDialog(book)"
+        (delete)="openDeleteConfirm(book)"
+      />
+    }
+  </div>
+}

@@ -1,0 +1,29 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-button {
+  margin-top: 8px;
+  height: 40px;
+}
+
+mat-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
