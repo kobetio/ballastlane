@@ -24,3 +24,8 @@ Thumbs.db
 !.vscode/extensions.json
 *.swp
 *.swo
+
+## =========================
+## Local / personal docs
+## =========================
+Interview Guide.md
